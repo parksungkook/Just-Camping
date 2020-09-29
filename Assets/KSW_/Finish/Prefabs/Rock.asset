@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f82dc17469763448d855567088f22c, type: 3}
+  m_Name: Rock
+  m_EditorClassIdentifier: 
+  itemName: Rock
+  itemImage: {fileID: 21300000, guid: 0e08639b8bfe949768d235105f40f9c9, type: 3}
+  itemPrefab: {fileID: 7270372546762876161, guid: 67525f111c3931147b8352d7b2fe9c9a,
+    type: 3}
+  itemType: 2
+  weaponType: 
