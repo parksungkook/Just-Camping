@@ -416,7 +416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   targetIndex: 0
-  player: {fileID: 1736747307951533930, guid: 95b0c0e00e4e39e46841d69505c3fd13, type: 3}
+  player: {fileID: 6035959281684152059, guid: 3296d9b3266cfeb4b9c8688c56f4e70c, type: 3}
   targets:
   - {fileID: 622821560979014772}
   - {fileID: 622821559854541793}

@@ -27,7 +27,7 @@ public class CameraRotate : MonoBehaviourPun
     Quaternion camRot;
 
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         if (photonView.IsMine) //Net 나일 경우만 
