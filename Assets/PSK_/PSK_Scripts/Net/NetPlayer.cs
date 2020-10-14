@@ -17,13 +17,13 @@ public class NetPlayer : MonoBehaviourPun, IPunObservable
     {
         // 만약에 내것이 아니라면
         if(photonView.IsMine == false)
-        {
+        {            
             cam.SetActive(false);
             GetComponent<PlayerMove>().enabled = false;
             cube.GetComponent<MeshRenderer>().material.color = Color.blue;
         }
         else
-        {
+        {         
             cube.GetComponent<MeshRenderer>().material.color = Color.red;
         }
     }
@@ -34,8 +34,8 @@ public class NetPlayer : MonoBehaviourPun, IPunObservable
         {
             if(photonView.IsMine)  //Net 나일경우만
             {
-                CreateBall();
-                //photonView.RPC("RpcCreateBall", RpcTarget.All);   //RPC로 할경우       내가 만들고 뿌린다
+                //CreateBall();
+                photonView.RPC("RpcCreateBall", RpcTarget.All);   //RPC로 할경우       내가 만들고 뿌린다
             }
         }
         

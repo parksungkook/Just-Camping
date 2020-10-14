@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 
 
@@ -14,6 +15,7 @@ public class Connection : MonoBehaviourPunCallbacks
 {
     public Button buttonConnect;
     public InputField inputFieldNickname;
+    public GameObject roomList;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class Connection : MonoBehaviourPunCallbacks
         PhotonNetwork.GameVersion = "1.0.0";
         PhotonNetwork.SendRate = 50 ;
         PhotonNetwork.SerializationRate = 50;
+        roomList.SetActive(false);
     }
 
    
@@ -41,7 +44,8 @@ public class Connection : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         base.OnJoinedLobby();
-        PhotonNetwork.LoadLevel(1);
+        roomList.SetActive(true);
+        
     }
 
     // Update is called once per frame

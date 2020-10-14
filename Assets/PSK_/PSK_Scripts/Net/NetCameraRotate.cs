@@ -9,9 +9,9 @@ using UnityEngine;
 //Player는 좌, 우 회전만
 //Camera는 상, 하 회전만
 //위, 아래 시야는 -80,80
-public class CameraRotate : MonoBehaviourPun
+public class NetCameraRotate : MonoBehaviourPun
 {
-    CharacterController cc;
+    
     //회전속도
     public float rotSpeed = 180;
 
@@ -32,11 +32,10 @@ public class CameraRotate : MonoBehaviourPun
     {
         if (photonView.IsMine) //Net 나일 경우만 
         {
-
-            rotCam = transform.localEulerAngles;
-
+            rotPlayer = trPlayer.localEulerAngles;
+            rotCam = transform.localEulerAngles;           
         }
-
+        //내가 아닐때는 손의 좌표도 받아오자
 
     }
 
@@ -45,8 +44,8 @@ public class CameraRotate : MonoBehaviourPun
     {
         if (photonView.IsMine)//Net 나일 경우만 
         {
-            if(!Cursor.visible)
-            {
+            //if(!Cursor.visible)
+            //{
 
                 //1. 마우스 좌우상하 입력받아서
                 float x = Input.GetAxis("Mouse X");
@@ -66,7 +65,7 @@ public class CameraRotate : MonoBehaviourPun
 
                 trPlayer.localEulerAngles = new Vector3(0, rotCam.y, 0);
                 transform.parent.localEulerAngles = new Vector3(0, -rotCam.y, 0);
-            }
+            //}
 
         }
 

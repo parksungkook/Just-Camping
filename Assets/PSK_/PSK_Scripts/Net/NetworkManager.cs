@@ -17,7 +17,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         int randIdx = Random.Range(0, 4);
 
         // 입장하면 스폰위치중 랜덤한 곳으로 스폰 
-        PhotonNetwork.Instantiate("[CameraRig]", spawnPos[randIdx].transform.position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player", spawnPos[randIdx].transform.position, Quaternion.identity);
         
        
     }

@@ -12,7 +12,7 @@ public class Ax : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {        
         lr = GetComponent<LineRenderer>();
     }
 
@@ -97,6 +97,7 @@ public class Ax : MonoBehaviour
             test.PlzOpen();
         }
     }
+
 }
 //VR//
 //도끼에 맞으면 1씩감소

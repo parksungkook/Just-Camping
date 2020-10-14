@@ -41,7 +41,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-        PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel(1);
 
     }
 
@@ -106,7 +106,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private void MakeUI()
     {
         //foreach (KeyValuePair<string, RoomInfo> info in roomCache)
-        //{
+        //{s
         //    GameObject item = Instantiate(itemRoomNameFactory);
         //    item.transform.parent = content.transform;
         //    item.GetComponent<ItemRoomName>().SetRoomName(info.Key);

@@ -50,7 +50,11 @@ public class RespawnManager : MonoBehaviour
 
         //만약 플레이어가
         //숲에 들어선다면
+        else
+        {
+
         UpdatePig();
+        }
     }
     void UpdatePig()
     {

@@ -57,7 +57,7 @@ public class line : MonoBehaviour
 
 
     //컨트롤러 UI
-    public GameObject controllerImage;
+   // public GameObject controllerImage;
 
 
 
@@ -94,8 +94,8 @@ public class line : MonoBehaviour
         TeleprotReticleTransform = reticle.transform;
         reticle.SetActive(false);
 
-        //컨트롤러UI 끄기
-        controllerImage.SetActive(false);
+        //컨트롤러UI 끄기        
+        //controllerImage.SetActive(false);
 
     }
 
@@ -279,19 +279,16 @@ public class line : MonoBehaviour
     void Controll()
     {
         controllerImageCheck = !controllerImageCheck;
+        
+
         //if(controllerImageCheck)
         //{
-        //    controllerImage.SetActive(!controllerImage.activeSelf);
-
+        //    controllerImage.SetActive(true);
         //}
-        if(controllerImageCheck)
-        {
-            controllerImage.SetActive(true);
-        }
-        else
-        {
-            controllerImage.SetActive(false);
-        }
+        //else
+        //{
+        //    controllerImage.SetActive(false);
+        //}
         
 
     }
