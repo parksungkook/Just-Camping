@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using Valve.VR;
 
-
 namespace Valve.VR
 {
     public class SteamVR_Behaviour_Skeleton : MonoBehaviour
@@ -317,11 +316,11 @@ namespace Valve.VR
                 return skeletonAction.direction;
             }
         }
-//Net수정
+
         protected virtual void Awake()
         {
             SteamVR.Initialize();
-            
+
             AssignBonesArray();
 
             proximals = new Transform[] { thumbProximal, indexProximal, middleProximal, ringProximal, pinkyProximal };
@@ -335,7 +334,6 @@ namespace Valve.VR
 
         protected virtual void CheckSkeletonAction()
         {
-            
             if (skeletonAction == null)
                 skeletonAction = SteamVR_Input.GetAction<SteamVR_Action_Skeleton>("Skeleton" + inputSource.ToString());
         }
