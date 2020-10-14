@@ -38,11 +38,11 @@ public class Connection : MonoBehaviourPunCallbacks
         base.OnConnectedToMaster();
         PhotonNetwork.JoinLobby(TypedLobby.Default);
     }
-    public override void OnJoinedLobby()
-    {
-        base.OnJoinedLobby();
-        PhotonNetwork.LoadLevel(1);
-    }
+    //public override void OnJoinedLobby()
+    //{
+    //    base.OnJoinedLobby();
+    //    PhotonNetwork.LoadLevel(1);
+    //}
 
     // Update is called once per frame
     void Update()

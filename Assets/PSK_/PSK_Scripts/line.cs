@@ -101,105 +101,137 @@ public class line : MonoBehaviour
 
     RaycastHit hit;
 
+    public bool useVR;
+
     public bool canBuildTent;
     bool clickTouchPad;
     bool clickTouchPad2;
 
     //아무것도 닿지 않았을때 레이어를 비우기
     int hitLayer = -1;
-    
+
     void Update()
     {
-        //if (teleportAction.GetState(SteamVR_Input_Sources.LeftHand))
-        if (teleportAction.GetState(leftHand))
+        if (useVR == true)
         {
-            if (Physics.Raycast(ControllerPose.transform.position, transform.forward, out hit, 100))
+            //if (teleportAction.GetState(SteamVR_Input_Sources.LeftHand))
+            if (teleportAction.GetState(leftHand))
             {
-                // print("a");
-                hitPoint = hit.point;
-                reticle.SetActive(false);
-                //shouldTeleport = true;
-                //TeleprotReticleTransform.position = hit.point;
-                int layer = hit.transform.gameObject.layer;
-                
-
-                switch (layer)
+                if (Physics.Raycast(ControllerPose.transform.position, transform.forward, out hit, 100))
                 {
-                    case 11:  //텔레포트 레이어
-                        // to do
-                        Ground();
-                        break;
+                    // print("a");
+                    hitPoint = hit.point;
+                    reticle.SetActive(false);
+                    //shouldTeleport = true;
+                    //TeleprotReticleTransform.position = hit.point;
+                    int layer = hit.transform.gameObject.layer;
+
+
+                    switch (layer)
+                    {
+                        case 11:  //텔레포트 레이어
+                                  // to do
+                            Ground();
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                laser.SetActive(false);
+                reticle.SetActive(false);
+            }
+
+            if (teleportAction.GetStateDown(rightHand))
+            {
+                //눌렸을때  다시누르면꺼지기
+                clickTouchPad = !clickTouchPad;
+
+                if (clickTouchPad)
+                {
+                    if (Physics.Raycast(ControllerPose.transform.position, transform.forward, out hit, 100))
+                    {//닿은 레이어를 담기
+                        hitLayer = hit.transform.gameObject.layer;
+                        if (hitLayer == 11)
+                        {
+                            canBuildTent = true;
+                        }
+                    }
+                }
+                //닿지 않으면 담긴 레이어 초기화
+                else
+                {
+                    ResetClickTouchPad();
+                }
+            }
+
+            if (clickTouchPad)
+            {
+                if (Physics.Raycast(ControllerPose.transform.position, transform.forward, out hit, 100))
+                {
+                    // print("a");
+                    hitPoint = hit.point;
+                    ShowLaser(hit);
+                    reticle.SetActive(false);
+                    //shouldTeleport = true;
+                    //TeleprotReticleTransform.position = hit.point;
+                    //int layer = hit.transform.gameObject.layer;
+
+                    TTTTTT(hitLayer);
+
+                }
+            }
+
+            if (teleportAction.GetStateUp(leftHand) && shouldTeleport)
+            {
+                if (hit.transform.gameObject.layer == 11)   //  땐 순간 hit의 레이어가 Ground일때만 텔레포트-
+                {
+                    Teleport();
                 }
             }
         }
         else
         {
-            laser.SetActive(false);
-            reticle.SetActive(false);
-        }
-
-        if(teleportAction.GetStateDown(rightHand))
-        {
-            //눌렸을때  다시누르면꺼지기
-            clickTouchPad = !clickTouchPad;
-
-            if(clickTouchPad)
+            if (name.Contains("Controller (right)") && Input.GetMouseButtonDown(0))
             {
-                if (Physics.Raycast(ControllerPose.transform.position, transform.forward, out hit, 100))
-                {//닿은 레이어를 담기
-                    hitLayer = hit.transform.gameObject.layer;
-                    if(hitLayer == 11)
-                    {
-                        canBuildTent = true;
-                    }
-                }
-            }
-            //닿지 않으면 담긴 레이어 초기화
-            else
-            {
-                ResetClickTouchPad();
-            }
-        }
-
-        if (clickTouchPad)
-        {
-            if (Physics.Raycast(ControllerPose.transform.position, transform.forward, out hit, 100))
-            {   
-                // print("a");
-                hitPoint = hit.point;
-                ShowLaser(hit);
-                reticle.SetActive(false);
-                //shouldTeleport = true;
-                //TeleprotReticleTransform.position = hit.point;
-                //int layer = hit.transform.gameObject.layer;
-
-                switch (hitLayer)
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
                 {
-                    case 15:  //Start
-                        GameStart();
-                        break;
-                    case 10:  //Item
-                        Item();
-                        break;
-                    case 12: //Lobby
-                        Lobby();
-                        break;
-                    case 14: //Exit
-                        ex();
-                        break;
-                    case 16: //Controll UI
-                        Controll();
-                        break;
+                    TTTTTT(hit.transform.gameObject.layer);
                 }
+
+                //if (Input.GetKeyDown(KeyCode.Alpha1))
+                //{
+                //    GameStart();
+                //}
+                //if (Input.GetKeyDown(KeyCode.Alpha2))
+                //{
+                //    Controll();
+                //}
             }
         }
+    }
 
-        if (teleportAction.GetStateUp(leftHand) && shouldTeleport)
+    void TTTTTT(int lay)
+    {
+        switch (lay)
         {
-            if (hit.transform.gameObject.layer == 11)   //  땐 순간 hit의 레이어가 Ground일때만 텔레포트-
-            {
-                Teleport();
-            }
+            case 15:  //Start
+                GameStart();
+                break;
+            case 10:  //Item
+                Item();
+                break;
+            case 12: //Lobby
+                Lobby();
+                break;
+            case 14: //Exit
+                ex();
+                break;
+            case 16: //Controll UI
+                Controll();
+                break;
         }
     }
 
@@ -231,7 +263,7 @@ public class line : MonoBehaviour
     }
     void OnGame()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
     void OnLobby()
     {
@@ -279,21 +311,10 @@ public class line : MonoBehaviour
     void Controll()
     {
         controllerImageCheck = !controllerImageCheck;
-        //if(controllerImageCheck)
-        //{
-        //    controllerImage.SetActive(!controllerImage.activeSelf);
-
-        //}
-        if(controllerImageCheck)
+        if (controllerImageCheck)
         {
-            controllerImage.SetActive(true);
+            controllerImage.SetActive(!controllerImage.activeSelf);
         }
-        else
-        {
-            controllerImage.SetActive(false);
-        }
-        
-
     }
     void ex()
     {
@@ -304,4 +325,3 @@ public class line : MonoBehaviour
     }
 
 }
-
