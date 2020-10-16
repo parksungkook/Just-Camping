@@ -8387,7 +8387,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1728131526}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1728131529}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a5fb0ca93b55ef4b8d54b512b103341, type: 3}
@@ -8405,7 +8405,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1728131526}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1728131531}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a5fb0ca93b55ef4b8d54b512b103341, type: 3}
@@ -8491,7 +8491,6 @@ MonoBehaviour:
   Exit:
     serializedVersion: 2
     m_Bits: 16384
-  controllerImage: {fileID: 1892628979}
   canBuildTent: 0
 --- !u!65 &1728131536
 BoxCollider:
@@ -8602,7 +8601,6 @@ MonoBehaviour:
   Exit:
     serializedVersion: 2
     m_Bits: 16384
-  controllerImage: {fileID: 1892628979}
   canBuildTent: 0
 --- !u!65 &1728131541
 BoxCollider:
@@ -8860,7 +8858,7 @@ Transform:
   - {fileID: 1978745446}
   - {fileID: 402347760}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1892628979
 GameObject:
@@ -10917,7 +10915,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00000093895505, y: 0}
+  m_AnchoredPosition: {x: 6.3421025, y: 0}
   m_SizeDelta: {x: -11.740967, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &8645775406482312277
@@ -11018,7 +11016,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8645775405406535774}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9963037
+  m_Size: 0.97138774
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
