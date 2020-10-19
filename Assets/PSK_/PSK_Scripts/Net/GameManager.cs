@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     Transform[] spawns;
 
     public PhotonView[] meats;
-    public List<PhotonView> meatList = new List<PhotonView>();
+    public List<PhotonView> meatList = new List<PhotonView>(); //Net 새로 생성된 리스트, 리스트 초기화, 아직 제거는 안시킴
 
     private void Awake()
     {
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
 
-    public GameObject FindMeat(int viewId)
+    public GameObject FindMeat(int viewId)//테스트
     {
         for(int i = 0; i < meats.Length; i++)
         {
@@ -54,11 +54,11 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
 
-        for(int i = 0; i < meatList.Count; i++)
+        for(int i = 0; i < meatList.Count; i++)// Net 새로 생성되는 고기들을 리스트에 담자
         {
-            if(meatList[i].ViewID == viewId)
+            if(meatList[i].ViewID == viewId)// Net 새로생성된 고기들을 리스트에 담자  
             {
-                return meatList[i].gameObject;
+                return meatList[i].gameObject; //Net 고기 게임오브젝트 반환
             }
         }
         return null;
@@ -66,9 +66,9 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.Alpha1)) //버튼이 눌린다면 
         {
-            PhotonNetwork.Instantiate("Meat_", new Vector3(76.35104f, 0.68f, 95), Quaternion.identity);
+            PhotonNetwork.Instantiate("Meat_", new Vector3(76.35104f, 0.68f, 95), Quaternion.identity);//Net 정해진 위치에 고기를 두자
         }
     }
 }

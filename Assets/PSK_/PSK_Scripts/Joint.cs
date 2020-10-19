@@ -40,12 +40,12 @@ public class Joint : MonoBehaviourPun//, IPunObservable
 
                 if (line.canBuildTent == false)// 텐트가 소환된 상태가 아닐때
                 {
-                    if (collidingObject)
+                    if (collidingObject) //충돌된, 잡은 객체
                     {
-                        PhotonView pv = collidingObject.GetComponent<PhotonView>();
+                        PhotonView pv = collidingObject.GetComponent<PhotonView>();//Net 충돌된 객체에 포톤뷰가 있다면
                         if(pv)
                         {                        
-                            playerPhotonView.RPC("RpcGrapObject", RpcTarget.All, pv.ViewID, 0);
+                            playerPhotonView.RPC("RpcGrapObject", RpcTarget.All, pv.ViewID, 0); //Net RPC 를 이용해서 잡는함수 호출, 뿌리고, 해당아이디, 손
                         }
                     //    photonView.RPC("GrabObject()", RpcTarget.All); //Net 생성 후 뿌리기
                     //    GrabObject();
@@ -68,7 +68,7 @@ public class Joint : MonoBehaviourPun//, IPunObservable
                     playerPhotonView.RPC("RpcReleaseObject", RpcTarget.All,
                         collidingObject.transform.position,
                         controllerPose.GetVelocity(), 
-                        controllerPose.GetAngularVelocity());
+                        controllerPose.GetAngularVelocity()); //Net RPC 놨을때 위치 보정 및 함수호출 , 모두에게 뿌리고, 위치, 속도, 방향 
                     collidingObject = null;
                 }
             }
