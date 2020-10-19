@@ -82,7 +82,7 @@ public class Joint : MonoBehaviourPun//, IPunObservable
         SetCollidingObject(other);
     }
     // 충돌중일 때
-    public void OnTriggerStay(Collider other)
+    public void OnTriggerStay(Collider other)// Net 불필요할듯
     {
         SetCollidingObject(other);
     }
@@ -106,13 +106,13 @@ public class Joint : MonoBehaviourPun//, IPunObservable
 
     }
 
-    private FixedJoint AddFixedJoint()
-    {
-        FixedJoint fx = gameObject.AddComponent<FixedJoint>();
-        fx.breakForce = 20000;
-        fx.breakTorque = 20000;
-        return fx;
-    }
+    //private FixedJoint AddFixedJoint() // 현재 사용안함
+    //{
+    //    FixedJoint fx = gameObject.AddComponent<FixedJoint>();
+    //    fx.breakForce = 20000;
+    //    fx.breakTorque = 20000;
+    //    return fx;
+    //}
 
 
     //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

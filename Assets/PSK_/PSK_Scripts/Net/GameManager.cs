@@ -44,9 +44,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
 
-    public GameObject FindMeat(int viewId)//테스트
+    public GameObject FindMeat(int viewId)
     {
-        for(int i = 0; i < meats.Length; i++)
+        for(int i = 0; i < meats.Length; i++)//Net 배열 테스트
         {
             if(meats[i].ViewID == viewId)
             {
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
 
-        for(int i = 0; i < meatList.Count; i++)// Net 새로 생성되는 고기들을 리스트에 담자
+        for(int i = 0; i < meatList.Count; i++)// Net 고기가 새로 생성될때마다  i 증가
         {
             if(meatList[i].ViewID == viewId)// Net 새로생성된 고기들을 리스트에 담자  
             {

@@ -102,27 +102,27 @@ public class PunPlayer : MonoBehaviourPun, IPunObservable
         PhotonNetwork.Instantiate("Ball", transform.position, Quaternion.identity); //Net 볼을 내자신의 자리에
     }
 
-    GameObject objectInHand;
-    [PunRPC]
+    GameObject objectInHand; ////Net 손
+    [PunRPC] ////Net RPC사용할 함수의 위에 작성
     void RpcGrapObject(int viewId, int handType)
     {
         print(viewId + ", " + handType);
 
-        objectInHand = GameManager.instance.FindMeat(viewId);
+        objectInHand = GameManager.instance.FindMeat(viewId); //Net 고기를 찾고
 
 
-        if (objectInHand == null) return;
+        if (objectInHand == null) return; //Net 아무것도 없으면 다시 리턴
 
         //운동법칙 꺼주자
         objectInHand.GetComponent<Rigidbody>().isKinematic = true;
 
-        if (handType == 0)
+        if (handType == 0)//Net 만약 왼손이면
         {
-            if(photonView.IsMine)
+            if(photonView.IsMine)//Net 가 나라면
             {
-                objectInHand.transform.parent = leftHand.transform; 
+                objectInHand.transform.parent = leftHand.transform; //Net 왼손컨트롤러의 자식으로
             }
-            else
+            else //Net 아니면 오른손 컨트롤러의 자식으로
             {
                 objectInHand.transform.parent = virtualleftHand.transform;
             }
