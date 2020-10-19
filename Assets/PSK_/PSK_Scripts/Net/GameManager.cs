@@ -4,13 +4,23 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 using Photon.Realtime;
+using UnityEngine.UIElements;
+
 public class GameManager : MonoBehaviourPunCallbacks
 {
+    public static GameManager instance;
+
     public Text textLog;
     public Transform spawnList;
     Transform[] spawns;
+
+    public PhotonView[] meats;
+    public List<PhotonView> meatList = new List<PhotonView>();
+
     private void Awake()
-    {                         //자식중에 받아 올 수 있다
+    {
+        instance = this;
+        //자식중에 받아 올 수 있다
         spawns = spawnList.GetComponentsInChildren<Transform>();
     }
     int type;
@@ -33,9 +43,32 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.SerializationRate = 50;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public GameObject FindMeat(int viewId)
     {
-        
+        for(int i = 0; i < meats.Length; i++)
+        {
+            if(meats[i].ViewID == viewId)
+            {
+                return meats[i].gameObject;
+            }
+        }
+
+        for(int i = 0; i < meatList.Count; i++)
+        {
+            if(meatList[i].ViewID == viewId)
+            {
+                return meatList[i].gameObject;
+            }
+        }
+        return null;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            PhotonNetwork.Instantiate("Meat_", new Vector3(76.35104f, 0.68f, 95), Quaternion.identity);
+        }
     }
 }

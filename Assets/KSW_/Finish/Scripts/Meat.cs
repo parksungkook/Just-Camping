@@ -23,6 +23,8 @@ public class Meat : MonoBehaviourPun
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.instance.meatList.Add(photonView);
+
         mr = GetComponent<MeshRenderer>();
         startTime =false;
     }

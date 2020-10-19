@@ -101,4 +101,54 @@ public class PunPlayer : MonoBehaviourPun, IPunObservable
         //ball.transform.position = transform.position;
         PhotonNetwork.Instantiate("Ball", transform.position, Quaternion.identity); //Net 볼을 내자신의 자리에
     }
+
+    GameObject objectInHand;
+    [PunRPC]
+    void RpcGrapObject(int viewId, int handType)
+    {
+        print(viewId + ", " + handType);
+
+        objectInHand = GameManager.instance.FindMeat(viewId);
+
+
+        if (objectInHand == null) return;
+
+        //운동법칙 꺼주자
+        objectInHand.GetComponent<Rigidbody>().isKinematic = true;
+
+        if (handType == 0)
+        {
+            if(photonView.IsMine)
+            {
+                objectInHand.transform.parent = leftHand.transform; 
+            }
+            else
+            {
+                objectInHand.transform.parent = virtualleftHand.transform;
+            }
+        }
+        else
+        {
+
+        }
+    }
+
+    [PunRPC]
+    void RpcReleaseObject(Vector3 pos, Vector3 velocity, Vector3 angularVelocity)
+    {
+        if (objectInHand == null) return;
+
+        //부모 없애자
+        objectInHand.transform.parent = null;
+
+        objectInHand.transform.position = pos;
+
+        //중력 켜주자
+        Rigidbody rb = objectInHand.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        rb.velocity = velocity;//controllerPose.GetVelocity();
+        rb.angularVelocity = angularVelocity;// controllerPose.GetAngularVelocity();
+
+        objectInHand = null;
+    }
 }
