@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 //체력을 표현하고 싶다.
 //도끼와 부딪히면 체력을 1 소모하게 하고싶다.
 //총알과 부딪치면 체력을 3 소모하게 하고싶다.
 //체력이 0이되면 죽고 싶다.
-public class PigHP : MonoBehaviour
+public class PigHP : MonoBehaviourPun
 {
     public static PigHP instance;
     public void Awake()
@@ -60,6 +61,7 @@ public class PigHP : MonoBehaviour
         {
 
             RestoreHealth();
+
         }
         //else
         //{
@@ -80,8 +82,9 @@ public class PigHP : MonoBehaviour
 
     public void OnMeat()
     {
-        GameObject meat = Instantiate(meatFactory);
-        meat.transform.position = transform.position;
+        PhotonNetwork.Instantiate("Meat_", transform.position, Quaternion.identity); //Net 고기를 내자신의 자리에
+        //GameObject meat = Instantiate(meatFactory);
+        //meat.transform.position = transform.position;
     }
 
 
