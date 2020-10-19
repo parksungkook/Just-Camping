@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Meat : MonoBehaviour
+public class Meat : MonoBehaviourPun
 {
     public MeshRenderer mr;
     //public Material wait;

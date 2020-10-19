@@ -25,7 +25,7 @@ public class PunPlayer : MonoBehaviourPun, IPunObservable
 
     void Start()
     {
-        if (photonView.IsMine)
+        if (photonView.IsMine) //Net 나일 경우만
         {
             camRig.SetActive(true);
             BuildManager bm = GameObject.Find("Manager/BuildingSystem").GetComponent<BuildManager>(); //굿코드

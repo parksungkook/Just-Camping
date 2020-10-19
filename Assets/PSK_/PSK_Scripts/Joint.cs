@@ -8,7 +8,7 @@ public class Joint : MonoBehaviour
     public SteamVR_Input_Sources handType; // 모두 사용, 왼손, 오른손
     public SteamVR_Behaviour_Pose controllerPose; // 컨트롤러 정보
     public SteamVR_Action_Boolean grabAction;
-
+    
     public GameObject collidingObject; // 현재 충돌중인 객체
     private GameObject objectInHand; // 플레이어가 잡은 객체
 

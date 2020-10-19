@@ -17,6 +17,10 @@ public class Connection : MonoBehaviourPunCallbacks
     public InputField inputFieldNickname;
     public GameObject roomList;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        Screen.SetResolution(640, 320, FullScreenMode.Windowed);
+    }
     void Start()
     {
         //설정을 하고 포톤서버에 연결하고싶다.
