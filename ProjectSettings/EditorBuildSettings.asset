@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/_Scene/Conn.unity
     guid: c6b5dee6184e22947944d7f85148dc97
   - enabled: 1
-    path: Assets/_Scene/00_Lobby.unity
+    path: Assets/_Scene/00_Lobby_Original.unity
     guid: f29800a1c3c7b0f429c3d6060588bcc3
   - enabled: 1
     path: Assets/_Scene/01_InGame.unity
