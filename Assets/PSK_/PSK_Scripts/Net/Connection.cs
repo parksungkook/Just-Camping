@@ -49,7 +49,7 @@ public class Connection : MonoBehaviourPunCallbacks
     {
         base.OnJoinedLobby();
         roomList.SetActive(true);
-        
+       
     }
 
     // Update is called once per frame
