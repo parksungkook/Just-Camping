@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Grill
+  - Pig
+  - Item
+  - Tent_SP
   layers:
   - Default
   - TransparentFX
@@ -22,7 +26,7 @@ TagManager:
   - Exit
   - Start
   - Controller
-  - 
+  - Player
   - 
   - 
   - 

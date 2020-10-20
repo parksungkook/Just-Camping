@@ -41,15 +41,15 @@ public class PunPlayer : MonoBehaviourPun, IPunObservable
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            if (photonView.IsMine)  //Net 나일경우만
-            {
-                CreateBall();
-                //photonView.RPC("RpcCreateBall", RpcTarget.All);   //RPC로 할경우       내가 만들고 뿌린다
-            }
-        }
+    {//Net 테스트
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    if (photonView.IsMine)  //Net 나일경우만
+        //    {
+        //        CreateBall();
+        //        //photonView.RPC("RpcCreateBall", RpcTarget.All);   //RPC로 할경우       내가 만들고 뿌린다
+        //    }
+        //}
 
         if (photonView.IsMine == false) //Net 내가 아닐때 
         {
@@ -122,14 +122,21 @@ public class PunPlayer : MonoBehaviourPun, IPunObservable
             {
                 objectInHand.transform.parent = leftHand.transform; //Net 왼손컨트롤러의 자식으로
             }
-            else //Net 아니면 오른손 컨트롤러의 자식으로
+            else //Net 아니면 왼손 모형 컨트롤러의 자식으로
             {
                 objectInHand.transform.parent = virtualleftHand.transform;
             }
         }
         else
         {
-
+            if (photonView.IsMine)//Net 가 나라면
+            {
+                objectInHand.transform.parent = rightHand.transform; //Net 오른손컨트롤러의 자식으로
+            }
+            else //Net 아니면 오른손 모형 컨트롤러의 자식으로
+            {
+                objectInHand.transform.parent = virtualRightHand.transform;
+            }
         }
     }
 
@@ -146,7 +153,7 @@ public class PunPlayer : MonoBehaviourPun, IPunObservable
         //중력 켜주자
         Rigidbody rb = objectInHand.GetComponent<Rigidbody>();
         rb.isKinematic = false;
-        rb.velocity = velocity;//controllerPose.GetVelocity();
+        rb.velocity = velocity*2;//controllerPose.GetVelocity();
         rb.angularVelocity = angularVelocity;// controllerPose.GetAngularVelocity();
 
         objectInHand = null;

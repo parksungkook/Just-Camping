@@ -6,12 +6,14 @@ using Valve.VR;
 
 public class Joint : MonoBehaviourPun//, IPunObservable
 {
-    public SteamVR_Input_Sources handType; // 모두 사용, 왼손, 오른손
+    //public SteamVR_Input_Sources handType; // 모두 사용, 왼손, 오른손
     public SteamVR_Behaviour_Pose controllerPose; // 컨트롤러 정보
     public SteamVR_Action_Boolean grabAction;
-    
+    public SteamVR_Input_Sources leftHand;
+    public SteamVR_Input_Sources rightHand;
+
     public GameObject collidingObject; // 현재 충돌중인 객체
-    private GameObject objectInHand; // 플레이어가 잡은 객체
+    //private GameObject objectInHand; // 플레이어가 잡은 객체
 
     bool grabb;  //잡는중
     line line;
@@ -20,10 +22,15 @@ public class Joint : MonoBehaviourPun//, IPunObservable
     Quaternion otherRot;
 
     public PhotonView playerPhotonView;
-
+    private void Awake()
+    {
+        leftHand = SteamVR_Input_Sources.LeftHand;
+        rightHand = SteamVR_Input_Sources.RightHand;
+    }
     // Start is called before the first frame update
     void Start()
     {
+        
         line = GetComponent<line>();
     }
 
@@ -34,33 +41,43 @@ public class Joint : MonoBehaviourPun//, IPunObservable
         if (!photonView.IsMine) return; //Net 내가아니라면
         
             // 잡는 버튼을 누를 때
-            if (grabAction.GetLastStateDown(handType))
+            if (grabAction.GetLastStateDown(leftHand)|| grabAction.GetLastStateDown(rightHand))
             {
                 clickTrigger = true;
-
+            
                 if (line.canBuildTent == false)// 텐트가 소환된 상태가 아닐때
                 {
                     if (collidingObject) //충돌된, 잡은 객체
                     {
                         PhotonView pv = collidingObject.GetComponent<PhotonView>();//Net 충돌된 객체에 포톤뷰가 있다면
-                        if(pv)
+                    if(grabAction.GetLastStateDown(leftHand))
+                    {
+
+                        if (pv)
                         {                        
-                            playerPhotonView.RPC("RpcGrapObject", RpcTarget.All, pv.ViewID, 0); //Net RPC 를 이용해서 잡는함수 호출, 뿌리고, 해당아이디, 손
+                            playerPhotonView.RPC("RpcGrapObject", RpcTarget.All, pv.ViewID,0); //Net RPC 를 이용해서 잡는함수 호출, 뿌리고, 해당아이디, 손
                         }
+                    }
+                    else
+                    {
+                        if (pv)
+                        {
+                            playerPhotonView.RPC("RpcGrapObject", RpcTarget.All, pv.ViewID, 1); //Net RPC 를 이용해서 잡는함수 호출, 뿌리고, 해당아이디, 손
+                        }
+                    }
+
                     //    photonView.RPC("GrabObject()", RpcTarget.All); //Net 생성 후 뿌리기
                     //    GrabObject();
                     }
+                    
                 }
             }
             //만약 clickTouchPad가 true라면
 
-            //그 위치에 텐트를 두고 싶다.
-            {
-
-            }
+         
 
             //잡는 버튼을 뗄 떼
-            if (grabAction.GetLastStateUp(handType))
+            if (grabAction.GetLastStateUp(leftHand)|| grabAction.GetLastStateUp(rightHand))
             {
                 clickTrigger = false;
                 if (collidingObject)

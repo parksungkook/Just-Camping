@@ -14,8 +14,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Transform spawnList;
     Transform[] spawns;
 
-    public PhotonView[] meats;
+    //public PhotonView[] meats;
     public List<PhotonView> meatList = new List<PhotonView>(); //Net 새로 생성된 리스트, 리스트 초기화, 아직 제거는 안시킴
+    //public List<PhotonView> zengaList = new List<PhotonView>(); //Net 새로 생성된 리스트, 리스트 초기화, 아직 제거는 안시킴
 
     private void Awake()
     {
@@ -37,22 +38,22 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     // Start is called before the first frame update
     void Start()
-    {//클라이언트에서 보내는 비율 1초에 30번(RPC)
+    {//클라이언트에서 보내는 비율 1초에 50번(RPC)
         PhotonNetwork.SendRate = 50;
-        //호출 비율 1초에 30번
+        //호출 비율 1초에 50번
         PhotonNetwork.SerializationRate = 50;
     }
 
 
     public GameObject FindMeat(int viewId)
     {
-        for(int i = 0; i < meats.Length; i++)//Net 배열 테스트
-        {
-            if(meats[i].ViewID == viewId)
-            {
-                return meats[i].gameObject;
-            }
-        }
+        //for(int i = 0; i < meats.Length; i++)//Net 배열 테스트
+        //{
+        //    if(meats[i].ViewID == viewId)
+        //    {
+        //        return meats[i].gameObject;
+        //    }
+        //}
 
         for(int i = 0; i < meatList.Count; i++)// Net 고기가 새로 생성될때마다  i 증가
         {
@@ -63,12 +64,24 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         return null;
     }
+    //public GameObject FindZenga(int viewId)
+    //{
+
+    //for(int i=0; i<zengaList.Count;i++)
+    //    {
+    //        if(zengaList[i].ViewID==viewId)
+    //        {
+    //            return zengaList[i].gameObject;
+    //        }
+    //    }
+    //}
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Alpha1)) //버튼이 눌린다면 
         {
             PhotonNetwork.Instantiate("Meat_", new Vector3(76.35104f, 0.68f, 95), Quaternion.identity);//Net 정해진 위치에 고기를 두자
+            PhotonNetwork.Instantiate("Zenga_", new Vector3(70f, 0.68f, 95), Quaternion.identity);//Net 정해진 위치에 젠가를 두자
         }
     }
 }
